@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../static/style.css"/>
+</head>
+<body>
+<div style="text-align:center">
+<h1>oh  
+    <span class='dots-in-title'>•</span> 
+    my 
+    <span class='dots-in-title'>•</span> 
+    chord 🎶
+</h1>
+<div class="vertical-content-spacer-small"></div>
+<h2>a tool for generating random chord progressions</h2>
+</div>
+<div style="height:56px"></div>
+<form method="post">
+<div class="vertical-center-align">
+    <div style="margin-right: auto; margin-left:0px;visibility:hidden">
+        <div class="centered-column-flex" id="dummy-randomness-adjust-region">
+        </div>
+    </div>
+    <div class="center-horizontally">
+        <button type="submit" id='generate-button'>Generate!</button>
+    </div>
+    <div style="margin-left: 0px;margin-right: auto;">
+        <div class="centered-column-flex" id="randomness-adjust-hover-region">
+            <h2 id="current-randomness-value" style="background-color: transparent;">{{ randomfactor }}% <i class="fa-solid fa-dice"></i></h2>
+            <input type="range" name="randomness-slider" value="{{ randomfactor }}" id="randomness-slider" style="display: none; margin-left: 32px; margin-right: 32px" oninput="onRandomnessSliderUpdate(this.value)" onchange="onRandomnessSliderChange(this.value)">
+        </div>
+    </div>
+    <!-- <button class="secondary-button" id="randomness-adjust-button" style="margin-right:auto">
+    <h2>xx% <i class="fa-solid fa-dice"></i></h2>
+    </button> -->
+</div>
+</form>
+<div class="vertical-section-spacer"></div>
+<div id="chords-wrapper">
+    <table>
+        <!-- <tr id="chord-symbols">
+            {% for chord, hue in chords|zip(hues) %}
+                <td bgcolor="{{ hue }}">{{ chord }}</td>
+            {% endfor %}
+        </tr> -->
+        <tr>
+            {% for _ in chords %}
+                <!-- <td style="font-weight: bold; background-color:hsla({{ hues[loop.index0] }}, 57%, 60%, 0.72);">{{ chords[loop.index0] | safe }}</td> -->
+                <td style="font-weight: bold; background-color:{{ hues[loop.index0] }};">{{ chords[loop.index0] | safe }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for _ in numerals %}
+                <td style="background-color:{{ hues[loop.index0] }};">{{ numerals[loop.index0] | safe }}</td>
+            {% endfor %}
+        </tr>
+    </table>
+    <!-- <div class="vertical-content-spacer"></div> -->
+        <button id="play-button" class="secondary-button" style="margin:24px auto;" onclick="onPlaybackButtonClick()">
+            <div class="vertical-center-align">
+            <h2>Playback</h2>
+            <i class="fa-solid fa-play fa-2x" style="margin-left:16px" id="playback-state-icon"></i>
+            </div>
+        </button>
+    </div>
+</div>
+<midi-player
+        id="midi-player"
+        src="../static/sample-chord-progression.mid" 
+        sound-font>
+        </midi-player>
+<script>
+    var playButton = document.getElementById('play-button');
+    var generateButton = document.getElementById('generate-button');
+    var randomnessAdjustButton = document.getElementById('randomness-adjust-hover-region');
+
+    document.getElementById('midi-player').addEventListener("stop", () => {
+        document.getElementById('playback-state-icon').setAttribute('class', 'fa-solid fa-play fa-2x');
+        document.getElementById('play-button').style.setProperty('background-color', '#736e66');
+});
+
+    playButton.addEventListener('mouseover', () => {
+        playButton.style.setProperty('background-color', '#918373'); //#998c7d or #837467 or #998b7c, #918373
+    });
+
+    playButton.addEventListener('mouseleave', () => {
+        playButton.style.setProperty('background-color', document.getElementById('midi-player')._playing ? '#4a4a4a' : '#736e66');
+    });
+
+    generateButton.addEventListener('mouseover', (event) => {
+        event.target.style.setProperty('background-color', '#F0A800');
+    });
+
+    generateButton.addEventListener('mouseleave', (event) => {
+        event.target.style.setProperty('background-color', '');
+    });
+    // B98F2D
+
+    randomnessAdjustButton.addEventListener('mouseenter', (event) => {
+        document.getElementById('randomness-slider').style.setProperty('display', 'inherit');
+        event.target.style.setProperty('background-color', '#918373');
+        console.log('Mettu');
+    });
+
+    randomnessAdjustButton.addEventListener('mouseleave', (event) => {
+        document.getElementById('randomness-slider').style.setProperty('display', 'none');
+        event.target.style.setProperty('background-color', '#736e66');
+    });
+
+    function onPlaybackButtonClick() {
+        document.getElementById('midi-player').playButton.click();
+        var midiIsPlaying = document.getElementById('midi-player')._playing;
+        document.getElementById('playback-state-icon').setAttribute('class',   `fa-solid fa-${midiIsPlaying ? 'pause' : 'play'} fa-2x`);
+        document.getElementById('play-button').style.setProperty('background-color', midiIsPlaying ? '#4a4a4a' : '#736e66');
+    }
+</script>
+<script>
+function onRandomnessSliderUpdate(value) {
+    // randomnessAdjustButton.innerHTML = `<h2>${value}% <i class="fa-solid fa-dice"></i></h2>`;
+    document.getElementById('current-randomness-value').innerHTML = `<h2>${value}% <i class="fa-solid fa-dice"></i></h2>`;
+}
+
+function onRandomnessSliderChange(value) {
+    console.log(value);
+    // document.getElementById('my-form').setAttribute('value', value);
+//     postRandomnessValueForm.submit(function(event){
+//     event.preventDefault();
+// }, false);
+}
+</script>
+<script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.5.0"></script>
+<script src="https://kit.fontawesome.com/78b31fabb3.js" crossorigin="anonymous"></script>
+</body>

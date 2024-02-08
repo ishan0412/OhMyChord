@@ -1,0 +1,230 @@
+@font-face {
+    font-family: "Futura";
+    src: url('../static/futura_yzYQF/Futura/Futura\ Medium/Futura\ Medium.otf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Futura";
+    src: url('../static/futura_yzYQF/Futura/Futura\ Heavy/Futura\ Heavy.otf');
+    font-weight: bold;
+}
+
+body {
+    background-image: url('background-darker.png');
+    /* background-color:  #171411;   #12100e or #171411 */
+    padding: 2.8%
+}
+
+h1 {
+    color: white;
+    font-weight: bold;
+    font-family: 'Futura';
+    font-size: 38px;
+    margin: 0px;
+    padding: 0px
+}
+
+h2 {
+    color: white;
+    font-weight: normal;
+    font-family: 'Futura';
+    font-size: 28px;
+    margin: 0px;
+    padding: 0px
+}
+
+#chords-wrapper {
+    width: 80%;
+    margin: auto;
+}
+
+table {
+    margin: auto;
+    border-spacing: 16px 0px;
+    table-layout: fixed;
+    width: 100%;
+}
+
+/* #chord-symbols {
+    font-weight: bold;
+} */
+
+.center-horizontally {
+    /* width: 100%;
+    display: flex;
+    margin: auto;
+    justify-content: flex-start;
+    align-items: center; */
+    /* position: relative;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.vertical-center-align {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+}
+
+.vertical-content-spacer {
+    height: 24px;
+}
+
+.vertical-content-spacer-small {
+    height: 16px;
+}
+
+.vertical-section-spacer {
+    height: 108px;
+    min-height: 8.4%;
+}
+
+.centered-column-flex {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+
+.dots-in-title {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+#playback-bar {
+    padding: 0px 16px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+
+#generate-button {
+    background-color: #ba8c21;/* #C28800, #c28f17, #c29836, #B38C32, #b38a2b, #b38b30, #b38927, #b38720, #ba8c21*/
+    color: white;
+    border: none;
+    border-radius: 12.5%/50%;
+    transition-duration: 0.2s;
+    /* height: 8.4%; 8.4% or 9.39% */
+    /* width: 28.17%; width = 3-3.4x height: 28.17% */
+    /* min-height: 72px; */
+    /* min-width: 216px; */
+    font-size: 48px;
+    font-weight: bold;
+    font-family: 'Futura';
+    margin: auto;
+    padding: 0.5em 2em
+}
+
+.secondary-button {
+    background-color: #736e66; /*#736f68,  */
+    color: white;
+    border: none;
+    margin: 24px;
+    display: block;
+    border-radius: 6px;
+    padding: 16px 48px;
+    transition-duration: 0.2s;
+}
+
+#dummy-randomness-adjust-region {
+    margin: 0px;
+    margin-left: 24px;
+    border-radius: 6px;
+    /* padding: 16px 32px; */
+    padding-bottom: 16px;
+    padding-top: 16px;
+    width: 159.29px;
+}
+
+#randomness-adjust-hover-region {
+    background-color: #736e66; /*#736f68,  */
+    color: white;
+    border: none;
+    margin: 0px;
+    margin-left: 24px;
+    border-radius: 6px;
+    /* padding: 16px 32px; */
+    padding-bottom: 16px;
+    padding-top: 16px;
+    transition-duration: 0.2s;
+    width: 159.29px;
+    transition-property: background-color height;
+}
+
+#randomness-slider {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 16px;
+    color: white;
+    accent-color: white;
+}
+
+#randomness-slider::-webkit-slider-runnable-track {
+    /* background: white; */
+    height: auto;
+}
+
+.randomness-adjust-button {
+    padding: 0;
+    height: 67.2px;
+    width: 191.29px;
+}
+
+
+/* #play-button-wrapper {
+    display: flex;
+    flex-direction:row;
+    justify-content: start;
+    align-items: center;
+} */
+
+td {
+    /* min-width: 288px;
+    width: 20%; */
+    color: white;
+    font-family: 'Futura';
+    font-size: 28px;
+    padding: 24px;
+    /* opacity: 75%; */
+}
+
+midi-player {
+    height: 0px;
+    width: 0px;
+    visibility: hidden;
+}
+
+/* midi-player::part(pl) {
+    height: 42px;
+    width: 42px;
+} */
+
+midi-player::part(control-panel) {
+    height: 0px;
+    width: 0px;
+    visibility: hidden;
+}
+
+midi-player::part(time) {
+    height: 0px;
+    width: 0px;
+    visibility: hidden;
+}
+  
+midi-player::part(seek-bar) {
+    height: 0px;
+    width: 0px;
+    visibility: hidden;
+}
