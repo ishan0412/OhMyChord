@@ -1,1 +1,4 @@
-flask~=3.0.1
+flask~=2.2.2
+mingus~=0.6.1
+numpy~=1.23.4
+MIDIUtil~=1.2.1

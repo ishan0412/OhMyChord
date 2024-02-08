@@ -9,7 +9,6 @@ app = Flask(__name__)
 app.jinja_env.filters['zip'] = zip
 
 global randomfactor
-randomfactor = 50
 
 @app.route('/', methods=('GET', 'POST'))
 def index():
@@ -18,7 +17,11 @@ def index():
     validchords = False
     while not validchords:
         try:
-            randomfactor_as_decimal = 1 - (randomfactor / 100)
+            try:
+                randomfactor_as_decimal = 1 - (randomfactor / 100)
+            except UnboundLocalError:
+                randomfactor = 50
+                randomfactor_as_decimal = 0.5
             print(f'randomfactor: {randomfactor_as_decimal}')
             chords, keys, numerals = generatechords(return_functional_analysis=True, numbars=4,
                                                     diatonicity_factor=randomfactor_as_decimal,
