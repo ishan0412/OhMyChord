@@ -42,7 +42,7 @@ def index():
     hues = ['#%02x%02x%02x' %
             tuple(map(lambda x: round(x * 255), hsv_to_rgb(
                 ((((note_to_int(c[0]) * 15) + (320 if (major_third(c[0]) == c[1]) else 140)) % 360) / 360),
-                0.27, 0.54))) for c in chords]  # s = 0.54-0.57, v = 0.60-0.62 -> s = 0.24-0.32, v = 0.54
+                0.28, 0.54))) for c in chords]  # s = 0.54-0.57, v = 0.60-0.62 -> s = 0.24-0.32, v = 0.54
     # hues = [((note_to_int(c[0]) * 15) + (320 if (major_third(c[0]) == c[1]) else 140)) % 360
     #         for c in chords]
     print(hues)
